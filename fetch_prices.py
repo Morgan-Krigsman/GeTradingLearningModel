@@ -11,7 +11,7 @@ requests_cache.install_cache('osrs_cache', expire_after=3600)
 # Base URL
 base_url = "https://prices.runescape.wiki/api/v1/osrs"
 
-# Define a descriptive User-Agent
+# Defined a descriptive User-Agent
 headers = {
     "Trade-app": "Trade-app/1.0 (@Puggstein)"
 }
@@ -21,7 +21,7 @@ headers = {
 def fetch_data(endpoint):
     url = base_url + endpoint
 
-    # Send GET request with custom headers
+    # Send GET request
     response = requests.get(url, headers=headers)
 
     # Check if the request was successful
@@ -33,30 +33,30 @@ def fetch_data(endpoint):
         return None
 
 
-# Function to save data to a file
+# Saves data to a file
 def save_to_file(data, filename):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
     print(f"File created: {filename}")
 
 
-# Determine the script's directory
+# Determines the script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Specify the sub-folder within the script's directory
+# Specifies the sub-folder within the script's directory
 output_dir = os.path.join(script_dir, "output")
 os.makedirs(output_dir, exist_ok=True)
 
 while True:
-    # Get the current timestamp
+    # Gets current timestamp
     timestamp = datetime.now().strftime("%Y%m%d%H%M")
 
-    # Fetch and save the latest prices
+    # Fetches and saves the latest prices
     latest_prices = fetch_data("/latest")
     if latest_prices:
         latest_prices_file = os.path.join(output_dir, f"{timestamp}.json")
         save_to_file(latest_prices, latest_prices_file)
         print("Latest prices query successful")
 
-    # Wait for 5 minutes before making the next request
+    # Waits for 5 minutes before making the next request
     time.sleep(300)
