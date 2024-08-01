@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
 
-# Step 1: Data Loading and Preprocessing
+# Data Loading and Preprocessing
 def load_data_from_json(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
@@ -13,7 +13,6 @@ def load_data_from_json(file_path):
 
 
 def preprocess_data(df):
-    # Features remain the same
     features = ['high_price', 'low_price', 'average_price']
     high_price_target = 'high_price_target'
     low_price_target = 'low_price_target'
@@ -25,10 +24,7 @@ def preprocess_data(df):
     return x.to_pandas(), y_high.to_pandas(), y_low.to_pandas()
 
 
-# Step 2: Feature Engineering (if necessary)
-# For simplicity, we will not add extra features in this example.
-
-# Step 3: Model Training
+# Model Training
 def train_model(x, y):
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     model = RandomForestRegressor(n_estimators=100, random_state=42)
@@ -41,10 +37,8 @@ def train_model(x, y):
     return model
 
 
-# Step 4: Model Evaluation
-# The evaluation is done during training using mean squared error.
-
-# Step 5: Predictions
+# Model Evaluation
+# Prediction making
 def make_predictions(model, new_data):
     return model.predict(new_data)
 
@@ -57,15 +51,14 @@ x, y_high, y_low = preprocess_data(df)
 model_high = train_model(x, y_high)
 model_low = train_model(x, y_low)
 
-# Making predictions on new data
-# new_data should be a DataFrame with the same structure as the training features
+# Predictions on new data
 new_data = pl.DataFrame({
     'high_price': [120, 250],
     'low_price': [100, 200],
     'average_price': [110, 225]
 }).to_pandas()
 
-# Predict high and low prices
+# High and low price predictions
 predicted_highs = make_predictions(model_high, new_data)
 predicted_lows = make_predictions(model_low, new_data)
 
