@@ -13,7 +13,7 @@ base_url = "https://prices.runescape.wiki/api/v1/osrs"
 
 # Defined a descriptive User-Agent
 headers = {
-    "Trade-app": "Trade-app/1.0 (@Puggstein)"
+    "User-Agent": "Trade-app/1.0 (@Puggstein)"
 }
 
 
