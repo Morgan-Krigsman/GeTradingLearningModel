@@ -24,6 +24,30 @@ def preprocess_data(df):
     return x.to_pandas(), y_high.to_pandas(), y_low.to_pandas()
 
 
+#possible fix
+
+#def preprocess_data(df):
+    # Sort the DataFrame by 'id' and 'timestamp'
+#    df = df.sort(by=['id', 'timestamp'])
+
+    # Create target variables by shifting prices
+#    df = df.with_columns([
+#        pl.col('high_price').shift(-1).alias('high_price_target'),
+#        pl.col('low_price').shift(-1).alias('low_price_target')
+#    ])
+#
+#    # Filter out the last entries where targets are null
+#    df = df.drop_nulls(subset=['high_price_target', 'low_price_target'])
+#
+#    features = ['high_price', 'low_price']
+#    x = df.select(features).to_pandas()
+#    y_high = df.select('high_price_target').to_pandas().values.ravel()
+#    y_low = df.select('low_price_target').to_pandas().values.ravel()
+#
+#    return x, y_high, y_low
+#
+
+
 # Model Training
 def train_model(x, y):
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
