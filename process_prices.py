@@ -68,8 +68,8 @@ with open(log_file_path, 'w', encoding='utf-8') as log_file:
 # Converts the list of prices to a Polars Dframe
 df = pl.DataFrame(all_prices)
 
-# Converts 'timestamp' column to datetime if not already
-df = df.with_column(pl.col("timestamp").str.strptime(pl.Datetime, format="%Y%m%d%H%M"))
+# 
+df = df.with_column(pl.col("timestamp").cast(pl.Datetime))
 
 # Sorts data by item ID and timestamp
 df = df.sort(by=['id', 'timestamp'])
