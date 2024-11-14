@@ -43,8 +43,8 @@ def make_predictions(model, new_data):
     return model.predict(new_data)
 
 
-file_path = 'data.json'
-df = load_data_from_json(file_path)
+file_path = 'output/aggregated_item_prices.csv'
+df = load_data(file_path)
 x, y_high, y_low = preprocess_data(df)
 
 # Train models
