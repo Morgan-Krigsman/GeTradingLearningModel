@@ -1,6 +1,7 @@
 import threading
 import time
 import os
+import subprocess
 
 
 def run_fetch_prices():
@@ -8,7 +9,7 @@ def run_fetch_prices():
 
 
 def run_process_prices():
-    os.system('python process_prices.py')
+    subprocess.Popen(['python', 'process_prices.py'])
 
 # fetch_prices script started in a separate thread
 fetch_thread = threading.Thread(target=run_fetch_prices)
