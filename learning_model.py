@@ -61,8 +61,7 @@ def train_model(x, y):
     return model
 
 
-# Model Evaluation
-# Prediction making
+# Model Evaluation and prediction making
 def make_predictions(model, new_data):
     return model.predict(new_data)
 
